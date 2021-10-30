@@ -1,4 +1,4 @@
-package ru.prostak.robotrader.domain;
+package ru.prostak.robotrader.domain.Debug;
 
 public class Main {
     public static void main(String[] args) {
