@@ -1,7 +1,14 @@
 package ru.prostak.robotrader.domain.Debug;
 
+import ru.prostak.robotrader.domain.Account.Account;
+import ru.prostak.robotrader.domain.Repository.IBrokerRepository;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("hello world");
+
+        IBrokerRepository tinkoffRepository;// = new TinkoffRepository(...);
+        IBrokerRepository binanceRepository;// = new BinanceRepository(...);
+
+        Account account = new Account();
     }
 }

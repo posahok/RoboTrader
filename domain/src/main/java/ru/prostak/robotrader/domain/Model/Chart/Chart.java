@@ -37,9 +37,8 @@ public class Chart {
         return candle;
     }
 
-    public void setCandle(ArrayList<Candle> candle) {
-        this.candle = candle;
-    }
+    public void setCandle(ArrayList<Candle> candle) { this.candle = candle; }
+
 }
 
 

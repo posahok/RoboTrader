@@ -5,5 +5,6 @@ public enum SecurityType {
     ETF,
     BOND,
     CRYPTO,
+    MONEY,
     UNKNOWN
 }
