@@ -5,9 +5,9 @@ import ru.prostak.robotrader.domain.Model.Enum.SecurityType;
 
 public class Stock extends AbstractSecurity{
 
-    public Stock(String ticker, Currency currency){
+    public Stock(String identifier, Currency currency){
         this.type = SecurityType.STOCK;
-        this.ticker = ticker;
+        this.identifier = identifier;
         this.currency = currency;
     }
 

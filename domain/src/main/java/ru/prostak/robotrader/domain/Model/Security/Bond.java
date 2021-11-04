@@ -5,9 +5,9 @@ import ru.prostak.robotrader.domain.Model.Enum.SecurityType;
 
 public class Bond extends AbstractSecurity{
 
-    public Bond(String ticker, Currency currency){
+    public Bond(String identifier, Currency currency){
         this.type = SecurityType.BOND;
-        this.ticker = ticker;
+        this.identifier = identifier;
         this.currency = currency;
     }
 

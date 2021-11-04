@@ -6,8 +6,19 @@ import ru.prostak.robotrader.domain.Model.Enum.SecurityType;
 public class AbstractSecurity {
     protected SecurityType type;
 
-    protected String ticker;
+    protected String identifier;
 
     protected Currency currency;
 
+    public SecurityType getType() {
+        return type;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
 }

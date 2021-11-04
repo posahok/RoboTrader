@@ -5,9 +5,9 @@ import ru.prostak.robotrader.domain.Model.Enum.SecurityType;
 
 public class CryptoCurrency extends AbstractSecurity{
 
-    public CryptoCurrency(String ticker, Currency currency){
+    public CryptoCurrency(String identifier, Currency currency){
         this.type = SecurityType.CRYPTO;
-        this.ticker = ticker;
+        this.identifier = identifier;
         this.currency = currency;
     }
 }
