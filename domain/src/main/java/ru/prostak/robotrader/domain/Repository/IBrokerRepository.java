@@ -12,8 +12,12 @@ import ru.prostak.robotrader.domain.Model.Security.AbstractSecurity;
 
 public interface IBrokerRepository {
 
-    List<AbstractSecurity> updateAvailableSecurities();
+    List<String> getAvailableIdentifiers();
 
-    BigDecimal getBalance(Currency currency);
+    AbstractSecurity getSecurity(String identifier);
+
+    boolean sell(String identifier, int lots);
+
+    boolean buy(String identifier, int lots);
 
 }

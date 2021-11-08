@@ -11,4 +11,5 @@ public class ETF extends AbstractSecurity{
         this.currency = currency;
     }
 
+
 }

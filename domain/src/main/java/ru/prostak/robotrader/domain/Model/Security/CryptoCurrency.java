@@ -10,4 +10,6 @@ public class CryptoCurrency extends AbstractSecurity{
         this.identifier = identifier;
         this.currency = currency;
     }
+
+
 }

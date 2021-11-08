@@ -1,36 +1,59 @@
 package ru.prostak.robotrader.domain.Account;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 
+import ru.prostak.robotrader.domain.Broker.GlobalBroker;
 import ru.prostak.robotrader.domain.Model.Enum.Currency;
 import ru.prostak.robotrader.domain.Model.Security.AbstractSecurity;
-import ru.prostak.robotrader.domain.Repository.IBrokerRepository;
+import ru.prostak.robotrader.domain.Model.Security.Bond;
+import ru.prostak.robotrader.domain.Model.Security.CryptoCurrency;
+import ru.prostak.robotrader.domain.Model.Security.ETF;
+import ru.prostak.robotrader.domain.Model.Security.Stock;
 
 public class Account {
     private Portfolio portfolio;
+    private GlobalBroker broker;
 
-    private HashMap<String, AbstractSecurity> availableSecutiries;
-
-    public Account(){
+    public Account(GlobalBroker broker){
         this.portfolio = new Portfolio();
-        availableSecutiries = new HashMap<>();
+        this.broker = broker;
     }
 
-    public void attachRepository(IBrokerRepository repository){
+    public boolean buy(String identifier, int lots){
+        boolean result = false;
 
-        for(AbstractSecurity security: repository.updateAvailableSecurities()){
-            String identifier = security.getIdentifier();
-            if(!availableSecutiries.containsKey(identifier))
-                availableSecutiries.put(identifier, security);
+        result = broker.buy(identifier, lots);
+
+        if(result){
+            AbstractSecurity boughtSecurity = broker.getSecurityByIdentifier(identifier);
+            switch (boughtSecurity.getType()){
+                case BOND:
+                    portfolio.addBond((Bond)boughtSecurity, lots);
+                case ETF:
+                    portfolio.addEtf((ETF)boughtSecurity, lots);
+                case STOCK:
+                    portfolio.addStock((Stock)boughtSecurity, lots);
+                case CRYPTO:
+                    portfolio.addCrypto((CryptoCurrency) boughtSecurity, lots);
+                case UNKNOWN:
+                    System.out.println("Wtf is this???: " + boughtSecurity.getIdentifier());
+            }
         }
 
-        for(Currency currency: Currency.values()){
-            BigDecimal balance = repository.getBalance(currency);
-            if(balance != null)
-                portfolio.balance.put(currency, balance);
-        }
+        return result;
+    }
 
+    public boolean sell(String identifier, int lots){
+        broker.sell(identifier, lots);
+        return  false;
+    }
+
+    public BigDecimal getBalance(Currency currency){
+        return portfolio.balance.get(currency);
+    }
+
+    public void PrintPortfolio(){
+        portfolio.Print();
     }
 
 

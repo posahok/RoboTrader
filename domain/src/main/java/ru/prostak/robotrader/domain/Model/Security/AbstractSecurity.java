@@ -21,4 +21,9 @@ public class AbstractSecurity {
     public Currency getCurrency() {
         return currency;
     }
+
+    @Override
+    public String toString() {
+        return identifier;
+    }
 }
