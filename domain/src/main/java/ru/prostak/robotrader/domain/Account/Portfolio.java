@@ -1,15 +1,15 @@
 package ru.prostak.robotrader.domain.Account;
 
-import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
 
 import java.math.BigDecimal;
 
 import java.util.HashMap;
 
+import ru.prostak.robotrader.domain.Exception.NegativeSecurityCountException;
 import ru.prostak.robotrader.domain.Model.Enum.Currency;
 import ru.prostak.robotrader.domain.Model.Security.*;
 
-class Portfolio {
+public class Portfolio {
     public HashMap<Currency, BigDecimal> balance;
 
     public HashMap<Bond, Integer> bonds;
@@ -32,34 +32,62 @@ class Portfolio {
         this.cryptos = new HashMap<>();
     }
 
-    public void addBond(Bond bond, int lots){
+    public void updateBalance(HashMap<Currency, BigDecimal> balance){
+        for(Currency currency: balance.keySet())
+            this.balance.put(currency, balance.get(currency));
+    }
+
+    public void changeBondCount(Bond bond, int lots) throws NegativeSecurityCountException{
         int currentLots = 0;
         if(bonds.containsKey(bond))
             currentLots = bonds.get(bond);
-        bonds.put(bond, currentLots+ lots);
+
+        int newBondCount = currentLots + lots;
+
+        if(newBondCount >= 0)
+            bonds.put(bond, newBondCount);
+        else
+            throw new NegativeSecurityCountException(bond, newBondCount);
     }
 
-    public void addStock(Stock stock, int lots){
+    public void changeStockCount(Stock stock, int lots) throws NegativeSecurityCountException{
         int currentLots = 0;
         if(stocks.containsKey(stock))
             currentLots = stocks.get(stock);
-        stocks.put(stock, currentLots+ lots);
+
+        int newBondCount = currentLots + lots;
+
+        if(newBondCount >= 0)
+            stocks.put(stock, newBondCount);
+        else
+            throw new NegativeSecurityCountException(stock, newBondCount);
     }
 
-    public void addEtf(ETF etf, int lots){
+    public void changeEtfCount(ETF etf, int lots) throws NegativeSecurityCountException{
         int currentLots = 0;
         if(etfs.containsKey(etf))
             currentLots = etfs.get(etf);
-        etfs.put(etf, currentLots+ lots);
+
+        int newBondCount = currentLots + lots;
+
+        if(newBondCount >= 0)
+            etfs.put(etf, newBondCount);
+        else
+            throw new NegativeSecurityCountException(etf, newBondCount);
     }
 
-    public void addCrypto(CryptoCurrency crypto, int lots){
+    public void changeCryptoCount(CryptoCurrency crypto, int lots) throws NegativeSecurityCountException{
         int currentLots = 0;
         if(cryptos.containsKey(crypto))
             currentLots = cryptos.get(crypto);
-        cryptos.put(crypto, currentLots+ lots);
-    }
 
+        int newBondCount = currentLots + lots;
+
+        if(newBondCount >= 0)
+            cryptos.put(crypto, newBondCount);
+        else
+            throw new NegativeSecurityCountException(crypto, newBondCount);
+    }
 
     public void Print() {
         System.out.println("Balance:");

@@ -3,6 +3,7 @@ package ru.prostak.robotrader.domain.Repository;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import ru.prostak.robotrader.domain.Model.Chart.Chart;
@@ -20,4 +21,5 @@ public interface IBrokerRepository {
 
     boolean buy(String identifier, int lots);
 
+    HashMap<Currency, BigDecimal> getBalance();
 }

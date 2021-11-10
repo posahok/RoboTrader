@@ -2,7 +2,6 @@ package ru.prostak.robotrader.presentation.Debug
 
 import ru.prostak.robotrader.domain.Account.Account
 import ru.prostak.robotrader.domain.Broker.GlobalBroker
-import ru.prostak.robotrader.domain.Model.Enum.Currency
 import ru.prostak.robotrader.domain.Repository.IBrokerRepository
 
 import ru.prostak.robotrader.data.Repository.TinkoffRepository
